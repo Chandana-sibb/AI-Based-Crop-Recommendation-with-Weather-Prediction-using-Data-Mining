@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- Site Meta -->
+    <title>Weather</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="Weather Forecasting Data View">
+    <meta name="author" content="">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Responsive Styles -->
+    <link rel="stylesheet" href="/static/css/responsive.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #0083b0;
+            padding: 20px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo a {
+            color: white;
+            font-size: 36px;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        table, td, th {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007b8c;
+            color: white;
+        }
+
+        td {
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Scrollable Table Body */
+        .table-container {
+            height: 400px;  /* Set desired height */
+            overflow-y: scroll;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer a {
+            color: #00b4db;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            table {
+                font-size: 14px;
+            }
+
+            footer {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body class="main-layout">
+    <!-- Loader -->
+    <div class="loader_bg">
+        <div class="loader"><img src="/static/images/loading.gif" alt="Loading..."></div>
+    </div>
+
+    <!-- Side Panel -->
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="/userhome">Home</a>
+        <a href="/load">Load</a>
+        <a href="/view">View</a>
+        <a href="/preprocessing">Preprocessing</a>
+        <a href="/model1">Model</a>
+        <a href="/prediction">Prediction</a>
+        <a href="/">Logout</a>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container-fluid">
+            <div class="row d-flex align-items-center">
+                <div class="col-sm-3">
+                    <div class="logo">
+                        <a href="index.html">Weather Forecasting</a>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                </div>
+                <div class="col-sm-4">
+                    <ul class="email text-right">
+                        <li><button class="openbtn" onclick="openNav()"><img src="/static/images/menu_btn.png" alt="Menu"></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- View Data Section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" style="padding-bottom: 350px;">
+                <div class="titlepage text-center">
+                    <h2>View Data</h2>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                {% for c in col %}
+                                    <th>{{ c }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in rows %}
+                                <tr>
+                                    {% for cell in row %}
+                                        <td>{{ cell }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Javascript Files -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/custom.js"></script>
+
+</body>
+
+</html>

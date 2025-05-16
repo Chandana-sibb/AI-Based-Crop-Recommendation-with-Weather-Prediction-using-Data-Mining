@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- Site Meta -->
+    <title>Weather Forecasting</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="Weather Forecasting Application">
+    <meta name="author" content="Weather Team">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Responsive Styles -->
+    <link rel="stylesheet" href="/static/css/responsive.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #0083b0;
+            padding: 20px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo a {
+            color: white;
+            font-size: 36px;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .social_icon a {
+            color: white;
+            font-size: 18px;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        .social_icon a:hover {
+            color: #00b4db;
+        }
+
+        .openbtn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Side Panel Styles */
+        #mySidepanel {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #222;
+            padding-top: 60px;
+            z-index: 1;
+            transition: 0.3s;
+        }
+
+        #mySidepanel a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 22px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        #mySidepanel a:hover {
+            color: #00b4db;
+        }
+
+        .closebtn {
+            position: absolute;
+            top: 0;
+            left: 10px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        /* About Section Styling */
+        .about {
+            background: #f1f1f1;
+            padding: 40px 0;
+        }
+
+        .titlepage {
+            font-size: 36px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .about_text {
+            background-color: #ffffff;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .about_text label {
+            color: #333;
+            font-size: 18px;
+        }
+
+        .about_text input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .about_text input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 18px;
+            background-color: #0083b0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .about_text input[type="submit"]:hover {
+            background-color: #007b8c;
+        }
+
+        /* Image Styling */
+        .about_img {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .about_img img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer a {
+            color: #00b4db;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .about {
+                padding: 20px;
+            }
+
+            .titlepage {
+                font-size: 28px;
+            }
+
+            .about_text input[type="submit"] {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body class="main-layout">
+
+    <!-- Loader -->
+    <div class="loader_bg">
+        <div class="loader"><img src="/static/images/loading.gif" alt="Loading..." /></div>
+    </div>
+    <!-- End Loader -->
+
+    <!-- Side Panel -->
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="/userhome">Home</a>
+        <a href="/load">Load</a>
+        <a href="/view">View</a>
+        <a href="/preprocessing">Preprocessing</a>
+        <a href="/model1">Model</a>
+        <a href="/prediction">Prediction</a>
+        <a href="/">Logout</a>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container-fluid">
+            <div class="row d-flex align-items-center">
+                <div class="col-sm-3">
+                    <div class="logo">
+                        <a href="index.html">Weather Forecasting</a>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <!-- <ul class="social_icon text-right d-none d-sm-block">
+                        <li><a href="javascript:void(0)"><i class="fa fa-facebook-f"></i></a></li>
+                        <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="javascript:void(0)"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="javascript:void(0)"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="javascript:void(0)"><i class="fa fa-youtube-play"></i></a></li>
+                    </ul> -->
+                </div>
+                <div class="col-sm-4">
+                    <ul class="email text-right">
+                        <li><button class="openbtn" onclick="openNav()"><img src="/static/images/menu_btn.png"></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Preprocessing and Split Data Section -->
+    <div id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="about_border">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="titlepage text-center">
+                                    <h2 style="color: #00b4db;">Preprocessing and Split Data</h2>
+                                </div>
+                                <div class="about_text">
+                                    <form action="{% url 'preprocessing' %}" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <label><b>Enter Split Size:</b></label>
+                                        <input type="text" placeholder="Test Data Size" name="split" required="required">
+                                        <input type="submit" value="Submit">
+                                        <div>
+                                            {% for message in messages %}
+                                                <center><h4 style="color: #00b4db;">{{ message }}</h4></center>
+                                            {% endfor %}
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="about_img">
+                                    <img class="img_responsive" src="/static/images/w5.png" alt="Weather Image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Javascript Files -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/jquery-3.0.0.min.js"></script>
+    <script src="/static/js/custom.js"></script>
+</body>
+
+</html>

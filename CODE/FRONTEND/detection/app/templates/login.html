@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Site metas -->
+    <title>Weather - Login</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="/static/css/responsive.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #3498db;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo a {
+            font-family: 'Poppins', sans-serif;
+            font-size: 30px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .head-top {
+            text-align: center;
+        }
+
+        /* Sidepanel (Menu) */
+        .sidepanel a {
+            font-size: 18px;
+            padding: 10px;
+            display: block;
+            color: #34495e;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .sidepanel a:hover {
+            background-color: #2980b9;
+            color: white;
+        }
+
+        /* About Section (Login form) */
+        #about {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ecf0f1;
+        }
+
+        .about_border {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 80%;
+            max-width: 900px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .about_text {
+            max-width: 400px;
+        }
+
+        .titlepage h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 10px 0;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #34495e;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #2980b9;
+        }
+
+        button[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        .about_img {
+            max-width: 400px;
+        }
+
+        .about_img img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .msg {
+            color: blue;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .about_border {
+                flex-direction: column;
+            }
+
+            .about_img {
+                display: none;
+            }
+
+            .about_text {
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="main-layout">
+
+    <!-- Loader -->
+    <div class="loader_bg">
+        <div class="loader"><img src="/static/images/loading.gif" alt="Loading..." /></div>
+    </div>
+
+    <!-- Sidepanel -->
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="{% url 'index' %}">HOME</a>
+        <a href="{% url 'about' %}">ABOUT</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'registration' %}">Registration</a>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-sm-3">
+                    <div class="logo">
+                        <a href="index.html" style="font-size: x-large;">Weather Forecasting</a>
+                    </div>
+                </div>
+                <div class="col-sm-9 text-right">
+                    <button class="openbtn" onclick="openNav()">
+                        <img src="/static/images/menu_btn.png" alt="Menu">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section (Login form) -->
+    <div id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="about_border">
+                        <div class="about_text">
+                            <div class="titlepage">
+                                <h2>User Login</h2>
+                            </div>
+                            <form action="{% url 'login' %}" method="post">
+                                {% csrf_token %}
+                                <label for="email">Email</label>
+                                <input type="text" id="email" name="email" placeholder="Enter your email" required="required">
+
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" placeholder="Enter your password" required="required">
+
+                                <button type="submit">Sign In</button>
+
+                                <div class="msg">
+                                    <h1>{{ msg }}</h1>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="about_img">
+                            <img src="/static/images/w7.png" alt="Weather Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/jquery-3.0.0.min.js"></script>
+    <script src="/static/js/custom.js"></script>
+
+</body>
+
+</html>

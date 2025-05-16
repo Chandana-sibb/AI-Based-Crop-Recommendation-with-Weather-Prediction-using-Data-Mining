@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Site metas -->
+    <title>Weather Forecasting</title>
+    <meta name="keywords" content="weather, forecasting, data mining">
+    <meta name="description" content="Weather forecasting using data mining techniques.">
+    <meta name="author" content="Your Name">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="/static/css/responsive.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Google Fonts (Poppins for headings, Roboto for body text) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <!-- Favicon (optional) -->
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7f7f7;
+        }
+        header {
+            background-color: #2C3E50;
+            padding: 20px 0;
+        }
+        .head-top .logo a {
+            font-size: 28px;
+            font-family: 'Poppins', sans-serif;
+            color: #ecf0f1;
+            font-weight: bold;
+        }
+        .email a {
+            color: #ecf0f1;
+            margin-right: 20px;
+            font-size: 18px;
+        }
+        .email a:hover {
+            color: #3498db;
+        }
+        .sidepanel a {
+            color: #2C3E50;
+            font-size: 18px;
+            padding: 10px;
+            display: block;
+        }
+        .sidepanel a:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        .carousel-item {
+            height: 100vh;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/static/images/weather-banner.jpg') no-repeat center center;
+            background-size: cover;
+        }
+        .carousel-caption h1 {
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .carousel-caption p {
+            color: #ecf0f1;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        .read_more {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #3498db;
+            border-radius: 30px;
+            text-decoration: none;
+        }
+        .read_more:hover {
+            background-color: #2980b9;
+        }
+        .carousel-indicators li {
+            background-color: #3498db;
+        }
+        .carousel-control-prev, .carousel-control-next {
+            font-size: 40px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="main-layout">
+    <!-- Loader -->
+    <div class="loader_bg">
+        <div class="loader"><img src="/static/images/loading.gif" alt="" /></div>
+    </div>
+    <!-- Sidepanel -->
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="{% url 'index' %}">HOME</a>
+        <a href="{% url 'about' %}">ABOUT</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'registration' %}">Registration</a>
+    </div>
+    <!-- Header -->
+    <header>
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-between align-items-center">
+                <div class="col-sm-3">
+                    <div class="logo">
+                        <a href="index.html">Weather Forecasting</a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <ul class="email text_align_right">
+                        <li class="d-none"><a href="Javascript:void(0)"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                        <li class="d-none"><a href="Javascript:void(0)"><i class="fa fa-search" style="cursor: pointer;" aria-hidden="true"></i></a></li>
+                        <li>
+                            <button class="openbtn" onclick="openNav()"><img src="/static/images/menu_btn.png" alt="Menu"></button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Slider Section -->
+    <div id="top_section" class="banner_main" style="height: 100vh;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="container-fluid">
+                                    <div class="carousel-caption relative">
+                                        <div class="row d_flex">
+                                            <div class="col-md-6">
+                                                <div class="con_img">
+                                                    <figure><img class="img_responsive" src="/static/images/w1.png" alt="Weather Image" /></figure>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="bluid">
+                                                    <h1>Weather Forecasting</h1>
+                                                    <p>Using Data Mining to Predict Weather Patterns and Trends.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/jquery-3.0.0.min.js"></script>
+    <script src="/static/js/custom.js"></script>
+</body>
+</html>

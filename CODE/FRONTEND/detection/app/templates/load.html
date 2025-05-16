@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- Site Metas -->
+    <title>Weather</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Custom Style CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="/static/css/responsive.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
+    <!-- Custom CSS -->
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Loader Styling */
+        .loader_bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5) url("/static/images/loading.gif") no-repeat center center;
+            z-index: 9999;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #0083b0;
+            padding: 20px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo a {
+            color: #fff;
+            font-size: 36px;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .social_icon a {
+            color: #fff;
+            padding: 10px;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .social_icon a:hover {
+            color: #00b4db;
+        }
+
+        .openbtn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Side Panel */
+        #mySidepanel {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #222;
+            z-index: 1;
+            padding-top: 60px;
+            overflow-x: hidden;
+            transition: 0.3s;
+        }
+
+        #mySidepanel a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 22px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        #mySidepanel a:hover {
+            color: #00b4db;
+        }
+
+        .closebtn {
+            position: absolute;
+            top: 0;
+            left: 10px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        /* About Section */
+        #about {
+            height: 100vh;
+            padding: 50px 0;
+            background-color: #fff;
+        }
+
+        .about_border {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+
+        .about_text {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .about_img img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .about .titlepage h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .about .about_text label {
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .about .about_text input[type="file"] {
+            background-color: #222;
+            color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .about .about_text input[type="submit"] {
+            background-color: #00b4db;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .about .about_text input[type="submit"]:hover {
+            background-color: #0083b0;
+        }
+
+        .about .about_text h3 {
+            font-size: 1.2rem;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer a {
+            color: #00b4db;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .logo a {
+                font-size: 28px;
+            }
+
+            .social_icon a {
+                font-size: 16px;
+                padding: 8px;
+            }
+
+            .about .titlepage h2 {
+                font-size: 2rem;
+            }
+
+            .about .about_text input[type="submit"] {
+                width: 100%;
+            }
+
+            .about .about_img img {
+                width: 80%;
+                margin-top: 20px;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="main-layout">
+    <!-- Loader -->
+    <div class="loader_bg">
+        <div class="loader"><img src="/static/images/loading.gif" alt="Loading..."></div>
+    </div>
+
+    <!-- Side Navigation Panel -->
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="/userhome">Home</a>
+        <a href="/load">Load</a>
+        <a href="/view">View</a>
+        <a href="/preprocessing">Preprocessing</a>
+        <a href="/model1">Model</a>
+        <a href="/prediction">Prediction</a>
+        <a href="/">Logout</a>
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container-fluid">
+            <div class="row d-flex">
+                <div class="col-sm-3">
+                    <div class="logo">
+                        <a href="index.html">Weather Forecasting</a>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                </div>
+                <div class="col-sm-4">
+                    <ul class="email text-right">
+                        <li><button class="openbtn" onclick="openNav()"><img src="/static/images/menu_btn.png" alt="Menu"></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <div id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="about_border">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="titlepage text-center">
+                                    <h2>Load Data</h2>
+                                </div>
+                                <div class="about_text text-center">
+                                    {% block body %}
+                                    {% if msg == 'valid' %}
+                                        <h3 style="color:Lightgreen;">CSV File Successfully Uploaded</h3>
+                                    {% elif msg == 'invalid' %}
+                                        <h3 style="color:red;">Please Upload CSV Files</h3>
+                                    {% endif %}
+                                    <br><br>
+
+                                    <form action="{% url 'load' %}" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <label style="color:white;">Choose CSV Files</label>
+                                        <input type="file" name="file" required><br><br>
+                                        <input type="submit" value="Submit" class="btn btn-info"><br><br>
+
+                                        {% for message in messages %}
+                                            <center><h4 style="color: #00b4db;">{{ message }}</h4></center>
+                                        {% endfor %}
+                                    </form>
+                                    {% endblock %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="about_img">
+                                    <figure><img class="img_responsive" src="/static/images/w4.png" alt="Weather Forecasting"></figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Weather Forecasting | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
+    <!-- Javascript Files -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/custom.js"></script>
+</body>
+
+</html>

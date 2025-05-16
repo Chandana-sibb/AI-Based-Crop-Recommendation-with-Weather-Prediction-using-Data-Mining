@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather Forecasting</title>
+
+    <!-- External CSS Links -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(135deg, #00b4db, #0083b0);
+            padding: 20px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo a {
+            color: #fff;
+            font-size: 36px;
+            font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .social_icon li a {
+            color: #fff;
+            padding: 10px;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .social_icon li a:hover {
+            color: #0083b0;
+        }
+
+        .openbtn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Side Navigation Panel */
+        #mySidepanel {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: #222;
+            overflow-x: hidden;
+            padding-top: 60px;
+            transition: 0.3s ease;
+        }
+
+        #mySidepanel a {
+            padding: 16px 20px;
+            text-decoration: none;
+            font-size: 24px;
+            color: #818181;
+            display: block;
+            transition: 0.3s ease;
+        }
+
+        #mySidepanel a:hover {
+            color: #00b4db;
+        }
+
+        .closebtn {
+            position: absolute;
+            top: 0;
+            left: 10px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        /* Slider Section */
+        #top_section {
+            height: 100vh;
+            background: url('/static/images/w4.png') center center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: #fff;
+            font-size: 3rem;
+            font-weight: 600;
+        }
+
+        .carousel-caption h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .read_more {
+            background-color: #00b4db;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 15px 10px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .read_more:hover {
+            background-color: #0083b0;
+        }
+
+        /* Carousel Styling */
+        .carousel-inner {
+            height: 100vh;
+        }
+
+        .carousel-item img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-control-prev, .carousel-control-next {
+            color: #fff;
+        }
+
+        .carousel-indicators li {
+            background-color: #00b4db;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: #00b4db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .logo a {
+                font-size: 28px;
+            }
+
+            .carousel-caption h1 {
+                font-size: 40px;
+            }
+
+            .read_more {
+                font-size: 14px;
+                padding: 8px 20px;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="main-layout">
+
+    <!-- Loader -->
+    <div class="loader_bg">
+        <div class="loader"><img src="/static/images/loading.gif" alt="Loading..." /></div>
+    </div>
+
+    <!-- Side Navigation Panel -->
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="/userhome">Home</a>
+        <a href="/load">Load</a>
+        <a href="/view">View</a>
+        <a href="/preprocessing">Preprocessing</a>
+        <a href="/model1">Model</a>
+        <a href="/prediction">Prediction</a>
+        <a href="/">Logout</a>
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container-fluid">
+            <div class="row d-flex align-items-center">
+                <div class="col-sm-3">
+                    <div class="logo">
+                        <a href="/userhome">Weather Forecasting</a>
+                    </div>
+                </div>
+                <div class="col-sm-9 text-right">
+                    <ul class="email d-inline-block">
+                        <li>
+                            <button class="openbtn" onclick="openNav()">
+                                <img src="/static/images/menu_btn.png" alt="Menu">
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Slider Section -->
+    <div id="top_section" class="banner_main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="carousel-caption relative">
+                                    <h1>Weather Forecasting</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      <!-- Javascript files-->
+      <script src="/static/js/jquery.min.js "></script>
+      <script src="/static/js/bootstrap.bundle.min.js "></script>
+      <script src="/static/js/jquery-3.0.0.min.js "></script>
+      <script src="/static/js/custom.js "></script>
+   </body>
+</html>

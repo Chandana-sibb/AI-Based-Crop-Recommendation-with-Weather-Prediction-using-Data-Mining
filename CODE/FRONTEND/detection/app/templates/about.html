@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Site metas -->
+    <title>Weather</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- Custom Style CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="/static/css/responsive.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Google Fonts (Poppins for headings, Roboto for body text) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #3498db;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo a {
+            font-family: 'Poppins', sans-serif;
+            font-size: 30px;
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        /* Side Panel */
+        .sidepanel a {
+            font-size: 18px;
+            padding: 10px;
+            display: block;
+            color: #2C3E50;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .sidepanel a:hover {
+            background-color: #2980b9;
+            color: white;
+        }
+
+        /* About Section */
+        #about {
+            background-color: #ffffff;
+            padding: 50px 0;
+        }
+
+        .about_border {
+            padding: 30px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .titlepage h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        .about_text p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #7f8c8d;
+        }
+
+        .read_more {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #3498db;
+            border-radius: 30px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .read_more:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .about_img img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Social Media Icons */
+        .social_icon a {
+            font-size: 20px;
+            margin: 0 10px;
+            color: #fff;
+            transition: color 0.3s;
+        }
+
+        .social_icon a:hover {
+            color: #3498db;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #34495e;
+            padding: 20px 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body class="main-layout">
+
+    <!-- Loader -->
+    <div class="loader_bg">
+        <div class="loader"><img src="/static/images/loading.gif" alt="Loading..." /></div>
+    </div>
+
+    <!-- Sidepanel -->
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'registration' %}">Registration</a>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-between align-items-center">
+                <div class="col-sm-3">
+                    <div class="logo">
+                        <a href="index.html">Weather Forecasting</a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <ul class="email text-align-right">
+                        <li><a href="Javascript:void(0)"><i class="fa fa-user"></i></a></li>
+                        <li><a href="Javascript:void(0)"><i class="fa fa-search" style="cursor: pointer;"></i></a></li>
+                        <li>
+                            <button class="openbtn" onclick="openNav()"><img src="/static/images/menu_btn.png" alt="Menu"></button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <div id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="about_border">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="titlepage text_align_left">
+                                    <h2>About Us</h2>
+                                </div>
+                                <div class="about_text">
+                                    <p>Weather forecasting is the process of predicting the state of the atmosphere for a given location and time period. It involves collecting and analyzing data on various atmospheric variables such as temperature, humidity, pressure, wind speed and direction, and precipitation. There are several methods used for weather forecasting, including numerical weather prediction, statistical methods, and analog forecasting.</p>
+                                    <a class="read_more" href="https://en.wikipedia.org/wiki/Weather_forecasting">Read More</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="about_img">
+                                    <figure><img class="img_responsive" src="/static/images/w9.png" alt="Weather Image" /></figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/jquery-3.0.0.min.js"></script>
+    <script src="/static/js/custom.js"></script>
+
+</body>
+</html>
